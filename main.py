@@ -1,16 +1,25 @@
-# This is a sample Python script.
+from pyrogram import Client, filters
+from userData.Data import api_id, api_hash
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+app = Client("my_account", api_id, api_hash)  # Подключение к клиенту
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+@app.on_message(filters.command("start"))
+def handle_message(client, message):
+    if message.from_user is not None:
+        app.send_message(message.chat.id,
+                         "Привет, напоню свои команды:\n"
+                         "/Users\n"
+                         "/Сообщения\n")
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+@app.on_message(filters.command("type", prefixes='!') & filters.me)
+def handle_message(client, message):
+    if message.from_user is not None:
+        app.send_message(message.chat.id,
+                         "Привет, напоню свои команды:\n"
+                         "/Users\n"
+                         "/Сообщения\n")
+
+
+app.run()
