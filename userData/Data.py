@@ -1,3 +1,3 @@
 
-api_id = 28753779
-api_hash = "99b72713683021dad1650a82082e9da4"
+api_id = ##
+api_hash = "##"

@@ -1,9 +1,8 @@
 from models.DatabaseConnection import db_session
 from models.DatabaseStructure import UserIDs, Messages
-from main import app
 
 
-def quantity_check_users_ids(message):
+def quantity_check_users_ids(message, app):
     session = db_session.create_session()
     user_all = session.query(UserIDs).all()
 
@@ -22,7 +21,7 @@ def quantity_check_users_ids(message):
     return True
 
 
-def quantity_check_message(message):
+def quantity_check_message(message, app):
     session = db_session.create_session()
     user_all = session.query(Messages).all()
 

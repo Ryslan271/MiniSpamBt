@@ -1,12 +1,9 @@
 from models.DatabaseStructure import UserIDs, Messages
 from models.DatabaseConnection import db_session
 from auxiliaryMethods.Methods import quantity_check_users_ids, quantity_check_message
-from pyrogram import filters
-from main import app
 
 
-@app.on_message(filters.command("adduser", prefixes='!') & filters.me)
-def text_set_users_ids(message):
+def text_set_users_ids(message, app):
     session = db_session.create_session()
 
     user_all = session.query(UserIDs).all()
@@ -29,8 +26,7 @@ def text_set_users_ids(message):
                      'Новые пользователи добавлены')
 
 
-@app.on_message(filters.command("deletemessage", prefixes='!') & filters.me)
-def text_delete_users_id(message):
+def text_delete_users_id(message, app):
     session = db_session.create_session()
     user_all = session.query(UserIDs).all()
 
@@ -61,8 +57,7 @@ def text_delete_users_id(message):
                          "\n".join([user.ListIds for user in user_all]))
 
 
-@app.on_message(filters.command("send", prefixes='!') & filters.me)
-def text_sending_message(message):
+def text_sending_message(message, app):
 
     pass
 
@@ -84,8 +79,7 @@ def text_sending_message(message):
                      'Сообщение отправлено')
 
 
-@app.on_message(filters.command("newmessage", prefixes='!') & filters.me)
-def text_set_message(message):
+def text_set_message(message, app):
     session = db_session.create_session()
 
     new_messages = Messages(
